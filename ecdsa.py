@@ -7,6 +7,7 @@ def hash256(s):
     return hashlib.sha256(hashlib.sha256(s).digest()).digest()
 
 class FieldElement:
+    # 有限域
 
     def __init__(self, num, prime):
         if num >= prime or num < 0:
@@ -79,6 +80,7 @@ class FieldElement:
 
 
 class Point:
+    # 椭圆曲线里的点
 
     def __init__(self, x, y, a, b):
         self.a = a
@@ -108,6 +110,9 @@ class Point:
             return 'Point({},{})_{}_{}'.format(self.x, self.y, self.a, self.b)
 
     def __add__(self, other):
+        """
+            点加法
+        """
         if self.a != other.a or self.b != other.b:
             raise TypeError('Points {}, {} are not on the same curve'.format(self, other))
         # Case 0.0: self is the point at infinity, return other
